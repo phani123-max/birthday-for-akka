@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jyothika Akka! 🎉❤️</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="images/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Floating Cute Background Animation -->
+    <div class="floating-bg" id="floatingBg"></div>
+
+    <div class="main-wrapper">
+        <!-- SCREEN 1: Passcode Lock Screen -->
+        <div class="screen active" id="screen0">
+            <div class="passcode-card card-shadow">
+                <div class="polaroid-box floating-element">
+                    <img src="images/photo1.jpeg" alt="Jyothika Akka" onerror="this.src='https://via.placeholder.com/220x250/8b1520/ffffff?text=Add+photo1.jpeg'">
+                    <p class="polaroid-caption">My Dearest <span class="glow-word">Akka</span> 💖</p>
+                    <p class="dob-badge">🎂 11 - 08 - 2005</p>
+                </div>
+                
+                <div class="keypad-side">
+                    <div class="cartoon-avatar bounce-anim" onclick="spawnTouchBurst(event)">🧑‍🤝‍🧑</div>
+                    <p class="keypad-title">ENTER PASSCODE (110826)</p>
+                    
+                    <div class="code-dots">
+                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    </div>
+
+                    <div class="keypad-grid">
+                        <button class="num-key" onclick="pressKey('1', event)">1</button>
+                        <button class="num-key" onclick="pressKey('2', event)">2</button>
+                        <button class="num-key" onclick="pressKey('3', event)">3</button>
+                        <button class="num-key" onclick="pressKey('4', event)">4</button>
+                        <button class="num-key" onclick="pressKey('5', event)">5</button>
+                        <button class="num-key" onclick="pressKey('6', event)">6</button>
+                        <button class="num-key" onclick="pressKey('7', event)">7</button>
+                        <button class="num-key" onclick="pressKey('8', event)">8</button>
+                        <button class="num-key" onclick="pressKey('9', event)">9</button>
+                        <button class="num-key" onclick="pressKey('0', event)" style="grid-column: span 3; width: 100%; border-radius: 25px;">0</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: Large Passcode Transition Screen -->
+        <div class="screen" id="screen1">
+            <div class="big-passcode-display glow-text">
+                <h1 id="enteredCodeText">11 / 08 / 26</h1>
+                <p class="code-subtext">✨ Welcome <span class="glow-word">Jyothika Akka</span> ✨</p>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: Loading Screen -->
+        <div class="screen" id="screen2">
+            <div class="loading-box card-shadow">
+                <p class="loading-greeting">Hey <span class="glow-word">Akka</span>! 👋✨</p>
+                <div class="cartoon-duo float-gentle">
+                    <span class="cartoon-character">👦</span>
+                    <span class="cartoon-heart">💖</span>
+                    <span class="cartoon-character">👧</span>
+                </div>
+                <p class="loading-text">Loading a special memory for you...</p>
+                <div class="loading-bar">
+                    <div class="loading-fill" id="loadingFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: Sister Fun Quiz -->
+        <div class="screen" id="screen_quiz">
+            <div class="quiz-box card-shadow">
+                <div class="cartoon-avatar pulse-icon">👧✨</div>
+                <div class="quiz-header">✨ AKKA CHECK-IN QUIZ ✨</div>
+                <p class="quiz-question" id="quizQuestion">Who is the most loving, caring & coolest <span class="glow-word">Akka</span> in the world? 🥺👑</p>
+                <div class="quiz-options" id="quizOptions">
+                    <button class="quiz-btn" onclick="answerQuiz(1, event)">Someone else 🙈</button>
+                    <button class="quiz-btn" onclick="answerQuiz(2, event)">My Jyothika Akka! 👑💖</button>
+                </div>
+                <p class="quiz-feedback" id="quizFeedback"></p>
+                <button class="btn-next hidden" id="quizNextBtn" onclick="showScreen(3, event)">Continue →</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 5: Envelope Screen -->
+        <div class="screen" id="screen3">
+            <div class="envelope-container card-shadow" onclick="openEnvelope(event)">
+                <div class="cartoon-avatar bounce-anim">💌👭</div>
+                <h2>To My Precious <span class="glow-word">Jyothika Akka</span> 🎉🌸</h2>
+                <p class="dob-sub">Born on 11th August 2005 🎈</p>
+                <div class="envelope-graphic float-gentle">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-seal">💌</div>
+                </div>
+                <p class="tap-hint">Tap the envelope to open your letter ✨</p>
+            </div>
+        </div>
+
+        <!-- SCREEN 6: Birthday Letter & Interactive Photo Stack -->
+        <div class="screen" id="screen4">
+            <div class="letter-layout card-shadow">
+                <div class="letter-left">
+                    <div class="cartoon-inline">👦 Brother & Akka 👧</div>
+                    <h1 class="letter-title">Dearest <span class="glow-word">Jyothika Akka</span> 🌸</h1>
+                    <p class="dob-tag">🎂 11 - 08 - 2005</p>
+                    <p class="letter-body">
+                        Having you as my <span class="glow-word">Akka</span> is the biggest blessing in my life. 🥺❤️<br><br>
+                        Through every laugh, every fight, and every secret we share, you've always been my <span class="glow-word">second mother</span> and my <span class="glow-word">forever safe place</span>.<br><br>
+                        Thank you for protecting me, guiding me, and always standing by my side. I hope this year brings you all the pure happiness you give to everyone around you. Never stop smiling, Akka! ✨💖
+                    </p>
+                    <p class="letter-sign">Always Your Loving Brother ❤️</p>
+                    <button class="btn-next" onclick="goToGiftScreen(event)">Unwrap Your Gift 🎁 →</button>
+                </div>
+
+                <!-- Tap to Flip Photo Deck -->
+                <div class="letter-right-deck-wrapper">
+                    <p class="tap-photo-hint">👉 Tap photo to see next memory, Akka!</p>
+                    <div class="photo-stack" id="photoDeck"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 7: Gift Unboxing Screen -->
+        <div class="screen" id="screen_gift">
+            <div class="gift-box-card card-shadow">
+                <div class="cartoon-avatar bounce-anim">🎁🧑‍🤝‍🧑</div>
+                <h2>A Special Gift For <span class="glow-word">Jyothika Akka</span> 🎁</h2>
+                <p class="subtitle">Tap the gift box to open your surprise!</p>
+                <div class="gift-box" id="giftBox" onclick="unwrapGift(event)">
+                    <div class="gift-ribbon"></div>
+                    <div class="gift-bow">🎀</div>
+                </div>
+                <div class="gift-content hidden" id="giftContent">
+                    <h3>🏆 World's Best Akka Pass!</h3>
+                    <p>Redeemable anytime: <b>100% Free Advice, Hugs & Zero Disturbance For 1 Month!</b> 🍿🥤</p>
+                    <button class="btn-next" onclick="goToCakeScreen(event)" style="margin-top: 15px;">Final Surprise 🎂 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 8: Cake & Blow Candle Screen -->
+        <div class="screen" id="screen5">
+            <div class="cake-screen-box card-shadow">
+                <div class="cartoon-duo bounce-anim">
+                    <span>👦</span><span>🎂</span><span>👧</span>
+                </div>
+                <h2 id="cakeHeader">✨ Make a Wish, <span class="glow-word">Jyothika Akka</span>! ✨</h2>
+                <p class="dob-tag">11 • 08 • 2005</p>
+                
+                <div class="pixel-cake" onclick="blowCandles(event)">
+                    <div class="candles-row">
+                        <div class="candle"><div class="flame" id="flame1"></div></div>
+                        <div class="candle"><div class="flame" id="flame2"></div></div>
+                        <div class="candle"><div class="flame" id="flame3"></div></div>
+                    </div>
+                    <div class="cake-top-layer"></div>
+                    <div class="cake-body-layer">
+                        <div class="cake-eyes">👀</div>
+                    </div>
+                </div>
+
+                <p class="cake-instruction" id="cakeInstruction">Tap the cake to blow out the candles! 🕯️</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

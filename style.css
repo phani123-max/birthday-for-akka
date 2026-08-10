@@ -1,0 +1,644 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #a31c28;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Glowing & Animated Text Highlights */
+.glow-word {
+    background: linear-gradient(135deg, #ffd700, #ff758c, #ffffff);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 700;
+    animation: textShimmer 2.5s infinite linear, gentlePulse 1.8s ease-in-out infinite alternate;
+    display: inline-block;
+    padding: 0 2px;
+}
+
+@keyframes textShimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes gentlePulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* Cartoon Animations */
+.cartoon-avatar {
+    font-size: 38px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s;
+}
+
+.cartoon-avatar:hover {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.cartoon-duo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+.cartoon-character {
+    animation: gentleBounce 2.5s ease-in-out infinite;
+}
+
+.cartoon-heart {
+    font-size: 20px;
+    animation: pulse 1.2s infinite;
+}
+
+.cartoon-inline {
+    font-size: 13px;
+    font-weight: 700;
+    color: #a31c28;
+    background: #ffdce0;
+    padding: 3px 12px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+/* Touch Particle Animation */
+.touch-particle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 24px;
+    z-index: 9999;
+    animation: burstParticle 0.8s ease-out forwards;
+}
+
+@keyframes burstParticle {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
+}
+
+/* Floating Background Animations */
+.floating-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-item {
+    position: absolute;
+    bottom: -50px;
+    font-size: 20px;
+    opacity: 0.35;
+    animation: floatUp 8s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.35; }
+    50% { opacity: 0.7; }
+    100% { transform: translateY(-105vh) rotate(360deg); opacity: 0; }
+}
+
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99;
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen.active {
+    display: flex;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.92); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.card-shadow {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* DOB Badges */
+.dob-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: #a31c28;
+    background: #ffe3e5;
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-top: 6px;
+}
+
+.dob-sub {
+    font-size: 13px;
+    color: #888;
+    margin-top: -5px;
+    font-weight: 500;
+}
+
+.dob-tag {
+    font-size: 12px;
+    background: #a31c28;
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+/* SCREEN 1: Passcode Screen */
+.passcode-card {
+    background: #8b1520;
+    border-radius: 20px;
+    padding: 35px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.floating-element {
+    animation: gentleBounce 3.5s ease-in-out infinite;
+}
+
+@keyframes gentleBounce {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+.polaroid-box {
+    background: #ffffff;
+    padding: 12px 12px 18px 12px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.polaroid-box img {
+    width: 220px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.polaroid-caption {
+    color: #222;
+    font-family: 'Sacramento', cursive;
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+.keypad-side {
+    text-align: center;
+}
+
+.pulse-icon {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.keypad-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.code-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    transition: background 0.2s;
+}
+
+.dot.filled {
+    background: #ffffff;
+    box-shadow: 0 0 8px #ffffff;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 190px;
+    margin: 0 auto;
+}
+
+.num-key {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(0,0,0,0.18);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.num-key:active, .num-key:hover {
+    background: rgba(255,255,255,0.35);
+    transform: scale(1.1);
+}
+
+/* SCREEN 2: Big Code Screen */
+.big-passcode-display {
+    text-align: center;
+}
+
+.big-passcode-display h1 {
+    font-size: 60px;
+    letter-spacing: 6px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.code-subtext {
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-top: 10px;
+}
+
+/* SCREEN 3: Loading Screen */
+.loading-box {
+    text-align: center;
+    background: #e8d8ce;
+    color: #333;
+    padding: 40px 60px;
+    border-radius: 20px;
+}
+
+.bounce-anim {
+    animation: bounce 1.2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.loading-bar {
+    width: 250px;
+    height: 12px;
+    background: #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px auto 0 auto;
+}
+
+.loading-fill {
+    height: 100%;
+    width: 0%;
+    background: #a31c28;
+    transition: width 0.05s linear;
+}
+
+/* SCREEN 4: Quiz Screen */
+.quiz-box {
+    background: #e8d8ce;
+    color: #333;
+    padding: 35px 45px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 450px;
+}
+
+.quiz-header {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #a31c28;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.quiz-question {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-btn {
+    background: #ffffff;
+    color: #a31c28;
+    border: 2px solid #a31c28;
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quiz-btn:active, .quiz-btn:hover {
+    background: #a31c28;
+    color: #ffffff;
+    transform: scale(1.03);
+}
+
+.quiz-feedback {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2b7a4b;
+}
+
+/* SCREEN 5: Envelope Screen */
+.envelope-container {
+    background: #e8d8ce;
+    color: #333;
+    padding: 40px 60px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.envelope-container:active {
+    transform: scale(0.98);
+}
+
+.float-gentle {
+    animation: gentleBounce 2.5s infinite ease-in-out;
+}
+
+.envelope-graphic {
+    width: 140px;
+    height: 100px;
+    background: #a31c28;
+    margin: 20px auto;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.envelope-seal {
+    font-size: 30px;
+}
+
+.tap-hint {
+    font-size: 13px;
+    color: #666;
+}
+
+/* SCREEN 6: Letter & Interactive Photo Deck */
+.letter-layout {
+    background: #e8d8ce;
+    color: #222;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    align-items: center;
+}
+
+.letter-left {
+    flex: 1.2;
+}
+
+.letter-title {
+    font-family: 'Sacramento', cursive;
+    font-size: 36px;
+    color: #a31c28;
+    margin-bottom: 2px;
+}
+
+.letter-body {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.letter-sign {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #a31c28;
+}
+
+.btn-next {
+    margin-top: 20px;
+    background: #a31c28;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.btn-next:active, .btn-next:hover {
+    transform: scale(1.05);
+}
+
+.letter-right-deck-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tap-photo-hint {
+    font-size: 12px;
+    font-weight: 600;
+    color: #a31c28;
+    margin-bottom: 8px;
+}
+
+.photo-stack {
+    position: relative;
+    width: 230px;
+    height: 290px;
+}
+
+.photo-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 10px 10px 24px 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 82%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.photo-card .caption {
+    font-family: 'Sacramento', cursive;
+    color: #2c2138;
+    margin-top: 4px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* SCREEN 7: Gift Box Screen */
+.gift-box-card {
+    background: #e8d8ce;
+    color: #333;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.gift-box {
+    width: 100px;
+    height: 100px;
+    background: #a31c28;
+    margin: 25px auto;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.gift-box:active, .gift-box:hover {
+    transform: scale(1.1) rotate(-3deg);
+}
+
+.gift-bow {
+    font-size: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* SCREEN 8: Cake & Blow Candles */
+.cake-screen-box {
+    text-align: center;
+    background: #e8d8ce;
+    color: #222;
+    padding: 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.pixel-cake {
+    margin: 30px auto;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.candles-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: -5px;
+}
+
+.candle {
+    width: 8px;
+    height: 25px;
+    background: yellow;
+    position: relative;
+}
+
+.flame {
+    width: 10px;
+    height: 14px;
+    background: orange;
+    border-radius: 50% 50% 20% 20%;
+    position: absolute;
+    top: -12px;
+    left: -1px;
+    box-shadow: 0 0 8px orange;
+}
+
+.flame.off {
+    opacity: 0;
+}
+
+.cake-top-layer {
+    width: 120px;
+    height: 25px;
+    background: #ffb7b2;
+    border-radius: 8px 8px 0 0;
+}
+
+.cake-body-layer {
+    width: 140px;
+    height: 45px;
+    background: #ffffff;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
